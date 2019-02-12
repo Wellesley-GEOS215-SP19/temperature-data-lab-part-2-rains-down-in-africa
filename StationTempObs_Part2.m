@@ -40,8 +40,9 @@ end
 figure(1); clf
 worldmap('World')
 load coastlines
-scatterm(coastlat,coastlon)
-scatterm(lat,lon,'m.','markersize',15)
+scatterm(lat,lon,20,P_Recent(:,1),'filled')
+plotm(coastlat,coastlon)
+% plotm(lat,lon,'m.','markersize',15)
 title('Locations of stations with observational temperature data')
 
 %Extension option: again using scatterm, plot the difference between the
