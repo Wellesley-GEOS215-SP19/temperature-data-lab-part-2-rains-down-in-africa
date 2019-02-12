@@ -21,7 +21,7 @@ P_Recent = NaN*zeros(length(RecentYear),2);
 %using the function StationTempObs_LinearTrend
 
 for i = 1:18
-    [P_all(i,:), P_Recent(i,:)] = StationTempObs_LinearTrend(sta(i), RecentYear)
+    [P_all, P_recent] = StationTempObs_LinearTrend(sta(i), RecentYear)
 end 
 
 
@@ -41,7 +41,7 @@ figure(1); clf
 worldmap('World')
 load coastlines
 scatterm(coastlat,coastlon)
-scatterm(lat,lon,'m.','markersize',15)
+scattern(lat,lon,'m.','markersize',15)
 title('Locations of stations with observational temperature data')
 
 %Extension option: again using scatterm, plot the difference between the
