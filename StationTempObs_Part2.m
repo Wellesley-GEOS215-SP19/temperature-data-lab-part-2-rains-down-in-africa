@@ -40,9 +40,10 @@ end
 figure(1); clf
 worldmap('World')
 load coastlines
-scatterm(lat,lon,20,P_Recent(:,1),'filled')
+scatterm(lat,lon,40,P_Recent(:,1),'filled')
 plotm(coastlat,coastlon)
-% plotm(lat,lon,'m.','markersize',15)
+%plotm(lat,lon,'m.','markersize',15)
+colorbar('southoutside')
 title('Locations of stations with observational temperature data')
 
 %Extension option: again using scatterm, plot the difference between the
@@ -63,17 +64,24 @@ title('Locations of stations with observational temperature data')
 %each station
 % Initialize arrays to hold all the output from the for loop you will write
 % below
-%<--
+
 
 % Write a for loop that will use the function StationModelProjections to
 % extract from the model projections for each station:
 % 1) the mean and standard deviation of the baseline period
 % (2006-2025) temperatures, 2) the annual mean temperature anomaly, and 3)
 % the slope and y-intercept of the linear trend over the 21st century
-%<--
+for i = 1:18
+   [baseline_model, tempAnnMeanAnomaly, P] = StationModelProjections(sta(i))
+end
 
 %% Plot a global map of the rate of temperature change projected at each station over the 21st century
-%<--
+figure(1); clf
+worldmap('World')
+load coastlines
+scatterm(lat,lon,40,%21st century,'filled')
+plotm(coastlat,coastlon)
+colorbar('southoutside')
 
 %% Plot a global map of the interannual variability in annual mean temperature at each station
 %as determined by the baseline standard deviation of the temperatures from
