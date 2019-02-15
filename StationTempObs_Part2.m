@@ -76,12 +76,12 @@ for i = 1:18
 end
 
 %% Plot a global map of the rate of temperature change projected at each station over the 21st century
-figure(1); clf
-worldmap('World')
-load coastlines
-scatterm(lat,lon,40,%21st century,'filled')
-plotm(coastlat,coastlon)
-colorbar('southoutside')
+% figure(1); clf
+% worldmap('World')
+% load coastlines
+% scatterm(lat,lon,40,%21st century,'filled')
+% plotm(coastlat,coastlon)
+% colorbar('southoutside')
 
 %% Plot a global map of the interannual variability in annual mean temperature at each station
 %as determined by the baseline standard deviation of the temperatures from

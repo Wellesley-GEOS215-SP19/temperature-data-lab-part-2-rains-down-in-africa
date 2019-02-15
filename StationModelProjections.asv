@@ -53,20 +53,20 @@ year = stationdata.Year;
 w2006 = find(year <= 2025)
 
 %mean of annual mean temp
-meanTemp = mean(tempData(w2006))
+meanTemp = tempData(w2006)
 
 %Standard deviation of annual mean temp
-stdTemp = std(tempData(w2006))
+stdTemp = std(meanTemp)
 
 
 %Combine mean and sd of annual mean together in array called baseline_model
-baseline_model = [meanTemp, stdTemp]
+baseline_model = [meanTemp]
 
 %assign anomaly
-tempAnnMeanAnomaly = aMean - tempData(w2006)
+tempAnnMeanAnomaly = aMean - baseline_model
 
 %slope
-P = polyfit(w2006 ,tempAnnMeanAnomaly, 1)
+P = polyfit(w2006 ,tempAnnMeanAnomaly', 1)
 
 
 
