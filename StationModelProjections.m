@@ -1,4 +1,4 @@
-%function [baseline_model, tempAnnMeanAnomaly, P] = StationModelProjections(station_number)
+function [baseline_model, tempAnnMeanAnomaly, P] = StationModelProjections(station_number)
 
 % StationModelProjections Analyze modeled future temperature projections at individual stations
 %===================================================================
@@ -38,7 +38,7 @@ stationdata = readtable(filename);
 tempData = table2array(stationdata(:,2))
 
 %annual mean for below
-aMean = mean(tempData')
+aMean = mean(tempData');
 
 %% Calculate the mean and standard deviation of the annual mean temperatures
 %  over the baseline period over the first 20 years of the modeled 21st
@@ -50,34 +50,28 @@ aMean = mean(tempData')
 
 %find 2006-2025
 year = stationdata.Year;
-w2006 = find(year <= 2025)
+w2006 = find(year <= 2025);
 
 %mean of annual mean temp
-meanTemp = mean(tempData(w2006))
+meanTemp = mean(tempData(w2006));
 
 %Standard deviation of annual mean temp
-stdTemp = std(tempData(w2006))
+stdTemp = std(tempData(w2006));
 
 
 %Combine mean and sd of annual mean together in array called baseline_model
-baseline_model = [meanTemp, stdTemp]
-
-%assign anomaly
-tempAnnMeanAnomaly = aMean - tempData(w2006)
-
-%slope
-P = polyfit(w2006 ,tempAnnMeanAnomaly, 1)
-
-
-
+baseline_model = [meanTemp, stdTemp];
 
 
 %% Calculate the 5-year moving mean smoothed annual mean temperature anomaly over the modeled period
  %<-- anomaly
+ tempAnnMeanAnomaly = aMean - tempData(w2006);
+ 
  %<-- smoothed anomaly
  smooth = movmean(tempAnnMeanAnomaly,5);
 
 %% Calculate the linear trend in temperature this station over the modeled 21st century period
- %<--
+ %<--slope
+ P = polyfit(w2006 ,tempAnnMeanAnomaly, 1);
 
-%end
+end

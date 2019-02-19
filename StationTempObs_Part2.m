@@ -72,21 +72,29 @@ title('Locations of stations with observational temperature data')
 % (2006-2025) temperatures, 2) the annual mean temperature anomaly, and 3)
 % the slope and y-intercept of the linear trend over the 21st century
 for i = 1:18
-   [baseline_model, tempAnnMeanAnomaly, P] = StationModelProjections(sta(i))
+   [baseline_model(i,:), tempAnnMeanAnomaly(:,i), P(i,:)] = StationModelProjections(sta(i))
 end
 
 %% Plot a global map of the rate of temperature change projected at each station over the 21st century
-% figure(1); clf
-% worldmap('World')
-% load coastlines
-% scatterm(lat,lon,40,%21st century,'filled')
-% plotm(coastlat,coastlon)
-% colorbar('southoutside')
+figure(2); clf
+worldmap('World')
+load coastlines
+scatterm(lat,lon,40,P(:,1),'filled')
+plotm(coastlat,coastlon)
+colorbar('southoutside')
+title('Rate of Temperature Changes Over 21st Century')
 
 %% Plot a global map of the interannual variability in annual mean temperature at each station
 %as determined by the baseline standard deviation of the temperatures from
-%2005 to 2025
-%<--
+%2006 to 2025
+figure(3); clf
+worldmap('World')
+load coastlines
+scatterm(lat,lon,40,baseline_model(:,2),'filled')
+plotm(coastlat,coastlon)
+colorbar('southoutside')
+title('Interannual Variability in Annual Mean Temperatures Calculated Throught Standard Deviation')
+
 
 %% Calculate the time of emergence of the long-term change in temperature from local variability
 %There are many ways to make this calcuation, but here we will compare the
@@ -100,5 +108,14 @@ end
 %temperatures from the baseline period
 %<--
 
+signal = P_all > (2 * baseline_model(:,2))
+
 %Plot a global map showing the year of emergence
 %<--
+figure(3); clf
+worldmap('World')
+load coastlines
+scatterm(lat,lon,40,signal,'filled')
+plotm(coastlat,coastlon)
+colorbar('southoutside')
+title('Long-term Temperature Signal Emergence')
