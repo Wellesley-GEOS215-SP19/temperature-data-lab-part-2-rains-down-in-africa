@@ -93,7 +93,7 @@ load coastlines
 scatterm(lat,lon,40,baseline_model(:,2),'filled')
 plotm(coastlat,coastlon)
 colorbar('southoutside')
-title('Interannual Variability in Annual Mean Temperatures Calculated Throught Standard Deviation')
+title('Interannual Variability in Annual Mean Temperatures Calculated Through Standard Deviation')
 
 
 %% Calculate the time of emergence of the long-term change in temperature from local variability
@@ -108,7 +108,7 @@ title('Interannual Variability in Annual Mean Temperatures Calculated Throught S
 %temperatures from the baseline period
 %<--
 
-signal = P_all > (2 * baseline_model(:,2))
+signal = ((2 * baseline_model(:,2)) ./ P(:,1)) + 2006
 
 %Plot a global map showing the year of emergence
 %<--
